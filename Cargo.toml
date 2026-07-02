@@ -1,0 +1,62 @@
+[package]
+name = "cpace"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "CPace balanced PAKE (draft-irtf-cfrg-cpace-21), CPaceRistretto255 cipher suite"
+license = "MIT OR Apache-2.0"
+categories = ["cryptography", "no-std"]
+keywords = ["pake", "cpace", "ristretto255", "password", "key-exchange"]
+
+[dependencies]
+curve25519-dalek = { version = "=4.1.3", default-features = false, features = [
+  "alloc",
+  "zeroize",
+] }
+sha2 = { version = "=0.11.0", default-features = false }
+zeroize = { version = "=1.9.0", default-features = false, features = [
+  "alloc",
+  "zeroize_derive",
+] }
+rand_core = { version = "=0.10.1", default-features = false }
+subtle = { version = "=2.6.1", default-features = false }
+thiserror = { version = "=2.0.18", default-features = false }
+
+[dev-dependencies]
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = { version = "=1.0.150" }
+base64 = { version = "=0.22.1" }
+hex = { version = "=0.4.3" }
+proptest = { version = "=1.11.0" }
+rand = { version = "=0.10.2" }
+
+[lints.rust]
+missing_docs = "deny"
+unsafe_code = "forbid"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+# Panic prevention
+unwrap_used = "deny"
+expect_used = "warn"
+panic = "deny"
+panic_in_result_fn = "deny"
+unimplemented = "deny"
+indexing_slicing = "deny"
+arithmetic_side_effects = "deny"
+# No cheating
+allow_attributes = "deny"
+# Code hygiene
+dbg_macro = "deny"
+todo = "deny"
+print_stdout = "deny"
+print_stderr = "deny"
+wildcard_enum_match_arm = "deny"
+# Safety
+await_holding_lock = "deny"
+large_futures = "deny"
+exit = "deny"
+mem_forget = "deny"
+# Pedantic relaxations (too noisy)
+module_name_repetitions = "allow"
+similar_names = "allow"
